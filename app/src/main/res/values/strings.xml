@@ -7,4 +7,5 @@
     <string name="btn_signin">Login</string>
     <string name="btn_delete">Delete</string>
     <string name="btn_update">Update</string>
+    <string name="btn_show">Show Data</string>
 </resources>

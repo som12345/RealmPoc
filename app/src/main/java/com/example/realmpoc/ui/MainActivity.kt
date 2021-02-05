@@ -1,5 +1,6 @@
 package com.example.realmpoc.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -17,46 +18,7 @@ class MainActivity : AppCompatActivity() {
         setUpViewModel()
         registerUser()
         observeLiveRegisterData()
-        observeLiveSignInData()
-        observeLiveDeleteData()
-    }
 
-    private fun observeLiveDeleteData() {
-        realmViewModel.deleteUser.observe(this, Observer {
-            when (it) {
-                true -> {
-                    Toast.makeText(
-                            this,
-                            "Deleted!", Toast.LENGTH_SHORT)
-                            .show()
-                }
-                false -> {
-                    Toast.makeText(
-                            this,
-                            "Not Deleted!", Toast.LENGTH_SHORT)
-                            .show()
-                }
-            }
-        })
-    }
-
-    private fun observeLiveSignInData() {
-        realmViewModel.signInUser.observe(this, Observer {
-            when (it) {
-                1 -> {
-                    Toast.makeText(
-                            this,
-                            "LoginSuccess", Toast.LENGTH_SHORT)
-                            .show()
-                }
-                else -> {
-                    Toast.makeText(
-                            this,
-                            "LoginFailed", Toast.LENGTH_SHORT)
-                            .show()
-                }
-            }
-        })
     }
 
     private fun observeLiveRegisterData() {
@@ -68,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                             "Congrats user registered successfully!", Toast.LENGTH_SHORT)
                             .show()
                 }
-                else -> {
+                0 -> {
                     Toast.makeText(
                             this,
                             "Sorry!,Something went wrong!!!", Toast.LENGTH_SHORT)
@@ -86,17 +48,14 @@ class MainActivity : AppCompatActivity() {
                     edittextPwd.text.toString()
             )
         }
-        btn_signin.setOnClickListener {
-            realmViewModel.retriveUser(
-                    edittextemail.text.toString(),
-                    edittextPwd.text.toString()
-            )
-        }
         btn_delete.setOnClickListener {
-            realmViewModel.deleteUser(edittextemail.text.toString())
+            startActivity(Intent(this@MainActivity, DeleteUserDataActivity::class.java))
         }
         btn_update.setOnClickListener {
-            realmViewModel.updateUser(edittextemail.text.toString())
+            startActivity(Intent(this@MainActivity, UpdateUserActivity::class.java))
+        }
+        btn_signin.setOnClickListener {
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
         }
     }
 

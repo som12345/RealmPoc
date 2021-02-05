@@ -44,14 +44,13 @@ class RealmViewModel : ViewModel() {
             students.asJSON(),
             Array<RegisterModel>::class.java
         ).toMutableList()
-        listResult.forEach {
-            when {
-                it.email == email && it.password == password -> {
-                    signInUser.value = 1
-                }
-                else -> {
-                    signInUser.value = 0
-                }
+        first@ for (item in listResult) {
+            if(item.email == email && item.password == password ) {
+                signInUser.value = 1
+                break@first
+            } else {
+                signInUser.value = 0
+                break@first
             }
         }
     }
@@ -86,5 +85,19 @@ class RealmViewModel : ViewModel() {
             updateUser.value = false
         }
 
+    }
+
+    /**
+     * Method to shown all user
+     */
+    fun showAllUser(): MutableList<RegisterModel> {
+        RealmManager.openLocalInstance()
+        val students = RealmManager.localInstance.where(
+            RegisterModel::class.java
+        ).findAll()
+        return Gson().fromJson(
+            students.asJSON(),
+            Array<RegisterModel>::class.java
+        ).toMutableList()
     }
 }
