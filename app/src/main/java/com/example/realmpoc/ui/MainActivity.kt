@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.realmpoc.R
+import com.example.realmpoc.util.Utils
 import com.example.realmpoc.viewmodel.RealmViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,11 +43,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun registerUser() {
         btn_save.setOnClickListener {
-            realmViewModel.createUser(
+            if(Utils.emailValidator(
+                    edittextemail.text.toString())
+            ) {
+                realmViewModel.createUser(
                     edittextName.text.toString(),
                     edittextemail.text.toString(),
                     edittextPwd.text.toString()
-            )
+                )
+            } else {
+                Toast.makeText(this,"Invalid email id",Toast.LENGTH_SHORT).show()
+            }
         }
         btn_delete.setOnClickListener {
             startActivity(Intent(this@MainActivity, DeleteUserDataActivity::class.java))

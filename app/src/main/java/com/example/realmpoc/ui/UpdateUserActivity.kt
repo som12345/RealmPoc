@@ -27,7 +27,7 @@ class UpdateUserActivity : AppCompatActivity() {
                 true -> {
                     var response=""
                     realmViewModel.showAllUser().forEach {
-                        response = response + "Name: ${it.name}, Age: ${it.password}" +"\n"
+                        response = response + "Name: ${it.name}, Password: ${it.password}" +"\n"
                     }
                     tv_updated.text = response
                     Toast.makeText(
