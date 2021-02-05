@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">RealmPoc</string>
+    <string name="enter_name">Please enter name</string>
+    <string name="enter_email">Please enter email</string>
+    <string name="enter_password">Please enter password</string>
+    <string name="register">Register</string>
+    <string name="btn_signin">Login</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_update">Update</string>
+</resources>
